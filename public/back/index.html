@@ -2,9 +2,81 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <title>登陆界面</title>
+  <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="lib/bootstrap-validator/css/bootstrapValidator.min.css">
+  <link rel="stylesheet" href="css/index.css">
+
 </head>
 <body>
-<h1>6666666666666666</h1>
+<!--左边栏-->
+<div class="lf_aside">
+  <div class="title"><a href="#">黑马19期</a></div>
+  <div class="user">
+    <img src="images/cc.jpg" alt="">
+    <p>超级管理员</p>
+  </div>
+  <div class="menus">
+    <ul>
+      <li>
+        <a class="current" href="#"><i class="glyphicon glyphicon-user"></i>用户管理</a>
+
+      </li>
+      <li>
+
+        <a class="two-menus" href="#"><i class="glyphicon glyphicon-list"></i>分类管理</a>
+        <div class="child">
+          <a href="#">一级菜单</a>
+          <a href="#">二级菜单</a>
+        </div>
+
+      </li>
+      <li><a href="#"><i class="glyphicon glyphicon-tags"></i>商品管理</a></li>
+    </ul>
+  </div>
+</div>
+<div class="lr_main">
+<div class="menus">
+  <a class="pull-left login-menus" href="#"><i class="glyphicon glyphicon-align-justify"></i></a>
+  <a class="pull-right login-exit" href="#"><i class="glyphicon glyphicon-log-out"></i></a>
+</div>
+  <!--路径导航-->
+  <div class="container-fluid">
+    <ol class="breadcrumb">
+      <li><a href="#">管理系统</a></li>
+      <li><a href="#">首页</a></li>
+
+    </ol>
+  </div>
+</div>
+
+<!--模态框的功能-->
+<div id="logoutModal" class="modal fade"  tabindex="-1" data-target=".bs-example-modal-sm">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" ><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">温馨提示</h4>
+      </div>
+      <div class="modal-body">
+        <p class="red">
+          <i class="glyphicon glyphicon-info-sign"></i>
+          您确定要退出后台管理系统吗？
+        </p>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary" id="logoutBtn">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="lib/jquery/jquery.min.js"></script>
+<script src="lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="lib/bootstrap-validator/js/bootstrapValidator.min.js"></script>
+<script src="js/index.js"></script>
+
 </body>
 </html>
