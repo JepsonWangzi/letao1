@@ -4,7 +4,7 @@
   list-style: none;
 }
 body{
-  /*background-color: cyan;*/
+
 }
 .lf_aside{
   width: 180px;
@@ -100,7 +100,7 @@ a:link, a:visited, a:hover, a:active{
 .lr_main{
   width: 100%;
   height: 1000px;
-  background-color: cyan;
+
   padding-left: 180px;
   padding-top: 50px;
   transition: all 1s;
@@ -141,4 +141,10 @@ a:link, a:visited, a:hover, a:active{
 /*公共类*/
 .red{
   color:#A94442;
+}
+.mb_30{
+  margin-bottom: 30px;
+}
+#first td{
+  line-height: 50px;
 }

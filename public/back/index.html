@@ -9,8 +9,6 @@
 
 </head>
 <body>
-<<<<<<< HEAD
-=======
 <!--左边栏-->
 <div class="lf_aside">
   <div class="title"><a href="#">黑马19期</a></div>
@@ -21,14 +19,14 @@
   <div class="menus">
     <ul>
       <li>
-        <a class="current" href="#"><i class="glyphicon glyphicon-user"></i>用户管理</a>
+        <a  href="user.html"><i class="glyphicon glyphicon-user"></i>用户管理</a>
 
       </li>
       <li>
 
         <a class="two-menus" href="#"><i class="glyphicon glyphicon-list"></i>分类管理</a>
         <div class="child">
-          <a href="#">一级菜单</a>
+          <a href="first.html">一级菜单</a>
           <a href="#">二级菜单</a>
         </div>
 
@@ -50,6 +48,11 @@
 
     </ol>
   </div>
+  <!--图表的插入-->
+  <div class="pull-left" id="charts1" style="width: 400px;height:300px;"></div>
+  <div class="pull-right" id="charts2" style="width: 400px;height:300px;"></div>
+
+
 </div>
 
 <!--模态框的功能-->
@@ -78,8 +81,92 @@
 <script src="lib/jquery/jquery.min.js"></script>
 <script src="lib/bootstrap/js/bootstrap.min.js"></script>
 <script src="lib/bootstrap-validator/js/bootstrapValidator.min.js"></script>
+<script src="lib/echarts/echarts.min.js"></script>
 <script src="js/index.js"></script>
->>>>>>> index
 
+
+<script type="text/javascript">
+  // 基于准备好的dom，初始化echarts实例
+  var myChart = echarts.init(document.getElementById('charts1'));
+
+  // 指定图表的配置项和数据
+  var option = {
+    title: {
+      text: '2018年注册人数'
+    },
+    tooltip: {},
+    legend: {
+      data:['人数']
+    },
+    xAxis: {
+      data: ["一月","二月","三月","四月","五月","六月"]
+    },
+    yAxis: {},
+    series: [{
+      name: '人数',
+      type: 'bar',
+      data: [1000, 1500, 1800, 1200, 1000, 500]
+    }]
+  };
+
+  // 使用刚指定的配置项和数据显示图表。
+  myChart.setOption(option);
+
+
+
+  // 基于准备好的dom，初始化echarts实例
+  var myChart1 = echarts.init(document.getElementById('charts2'));
+
+  // 指定图表的配置项和数据
+  option = {
+    title : {
+      text: '热门品牌销售',
+      // 子标题
+      subtext: '2017年6月',
+      // 水平居中
+      x:'center'
+    },
+    tooltip : {
+      trigger: 'item',
+      formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    // 图例
+    legend: {
+      // 垂直排列
+      orient: 'vertical',
+      // 居左显示
+      left: 'left',
+      data: ['耐克','阿迪','新百伦','李宁','阿迪王']
+    },
+    series : [
+      {
+        name: '品牌',
+        // 饼状图
+        type: 'pie',
+        // 圆的大小
+        radius : '50%',
+        // 圆心的位置
+        center: ['50%', '60%'],
+        data:[
+          {value:335, name:'耐克'},
+          {value:310, name:'阿迪'},
+          {value:234, name:'新百伦'},
+          {value:135, name:'李宁'},
+          {value:1548, name:'阿迪王'}
+        ],
+        itemStyle: {
+          // 设置阴影效果
+          emphasis: {
+            shadowBlur: 30,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 0, 0, 1)'
+          }
+        }
+      }
+    ]
+  };
+  // 使用刚指定的配置项和数据显示图表。
+  myChart1.setOption(option);
+</script>
 </body>
 </html>
