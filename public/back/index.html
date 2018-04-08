@@ -5,6 +5,7 @@
   <title>登陆界面</title>
   <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css">
   <link rel="stylesheet" href="lib/bootstrap-validator/css/bootstrapValidator.min.css">
+  <link rel="stylesheet" href="lib/nprogress/nprogress.css">
   <link rel="stylesheet" href="css/index.css">
 
 </head>
@@ -13,25 +14,20 @@
 <div class="lf_aside">
   <div class="title"><a href="#">黑马19期</a></div>
   <div class="user">
-    <img src="images/cc.jpg" alt="">
+    <img src="images/xdd.gif" alt="">
     <p>超级管理员</p>
   </div>
   <div class="menus">
     <ul>
+      <li><a href="user.html"><i class="glyphicon glyphicon-user"></i><span>用户管理</span></a></li>
       <li>
-        <a  href="user.html"><i class="glyphicon glyphicon-user"></i>用户管理</a>
-
-      </li>
-      <li>
-
-        <a class="two-menus" href="#"><i class="glyphicon glyphicon-list"></i>分类管理</a>
-        <div class="child">
-          <a href="first.html">一级菜单</a>
-          <a href="#">二级菜单</a>
+        <a href="javascript:;" class="category two-menus"><i class="glyphicon glyphicon-list"></i><span>分类管理</span></a>
+        <div class="child" style="display: none;">
+          <a href="first.html">一级分类</a>
+          <a href="second.html">二级分类</a>
         </div>
-
       </li>
-      <li><a href="#"><i class="glyphicon glyphicon-tags"></i>商品管理</a></li>
+      <li><a href="product.html"><i class="glyphicon glyphicon-tags"></i><span>商品管理</span></a></li>
     </ul>
   </div>
 </div>
@@ -49,8 +45,11 @@
     </ol>
   </div>
   <!--图表的插入-->
-  <div class="pull-left" id="charts1" style="width: 400px;height:300px;"></div>
-  <div class="pull-right" id="charts2" style="width: 400px;height:300px;"></div>
+  <div class="container">
+    <div class="pull-left" id="charts1" style="width: 400px;height:300px;"></div>
+    <div class="pull-right" id="charts2" style="width: 400px;height:300px;"></div>
+  </div>
+
 
 
 </div>
@@ -82,6 +81,7 @@
 <script src="lib/bootstrap/js/bootstrap.min.js"></script>
 <script src="lib/bootstrap-validator/js/bootstrapValidator.min.js"></script>
 <script src="lib/echarts/echarts.min.js"></script>
+<script src="lib/nprogress/nprogress.js"></script>
 <script src="js/index.js"></script>
 
 

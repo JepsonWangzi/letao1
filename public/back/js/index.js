@@ -2,6 +2,42 @@
  * Created by 王子臣 on 2018/4/6.
  */
 
+//功能五进度条
+// 配置禁用小圆环
+NProgress.configure({ showSpinner: false });
+
+$(document).ajaxStart(function() {
+  NProgress.start();
+  NProgress.configure({ ease: 'ease', speed: 500 });
+});
+
+
+// ajaxStop 所有的 ajax 结束调用
+$(document).ajaxStop(function() {
+  // 模拟网络延迟
+  setTimeout(function() {
+    NProgress.done();
+  }, 500)
+});
+//***********************************************
+
+//功能六 登陆拦截
+if(location.href.indexOf("login.html")===-1){
+  $.ajax({
+    url:'/employee/checkRootLogin',
+    type:'get',
+    success:function (info) {
+      console.log(info);
+      if(info.success){
+        console.log(666);
+      }
+      if(info.error===400){
+        //拦截登陆
+        location.href="login.html"
+      }
+    }
+  })
+}
 
 $(function () {
 
@@ -17,7 +53,8 @@ $(".login-menus").click(function () {
 
   //功能二 二级菜单的显示与隐藏
  $(".two-menus").click(function () {
-     $(this).next().stop().slideToggle();
+   //console.log(666);
+   $(this).next().stop().slideToggle();
  });
 
 
@@ -43,12 +80,10 @@ $(".login-menus").click(function () {
     })
   });
 
-  //功能五：点击菜单栏高亮
 
-  $(".lf_aside .menus li>a").click(function () {
-    //
-    $(this).addClass("current").parents("li").siblings().children().removeClass("current")
-  })
+
+
+
 
 
 

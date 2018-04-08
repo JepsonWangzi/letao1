@@ -5,6 +5,7 @@
   <title>登陆界面</title>
   <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css">
   <link rel="stylesheet" href="lib/bootstrap-validator/css/bootstrapValidator.min.css">
+  <link rel="stylesheet" href="lib/nprogress/nprogress.css">
   <link rel="stylesheet" href="css/index.css">
 
 </head>
@@ -13,25 +14,25 @@
 <div class="lf_aside">
   <div class="title"><a href="#">黑马19期</a></div>
   <div class="user">
-    <img src="images/cc.jpg" alt="">
+    <img src="images/xdd.gif" alt="">
     <p>超级管理员</p>
   </div>
   <div class="menus">
     <ul>
       <li>
-        <a class="current" href="#"><i class="glyphicon glyphicon-user"></i>用户管理</a>
+        <a href="user.html"><i class="glyphicon glyphicon-user"></i>用户管理</a>
 
       </li>
       <li>
 
-        <a class="two-menus" href="#"><i class="glyphicon glyphicon-list"></i>分类管理</a>
+        <a class="two-menus" href="javascript:;"><i class="glyphicon glyphicon-list"></i>分类管理</a>
         <div class="child">
           <a  href="first.html">一级菜单</a>
-          <a class="current" href="javascrip:;">二级菜单</a>
+          <a class="current" href="second.html:;">二级菜单</a>
         </div>
 
       </li>
-      <li><a href="#"><i class="glyphicon glyphicon-tags"></i>商品管理</a></li>
+      <li><a href="product.html"><i class="glyphicon glyphicon-tags"></i>商品管理</a></li>
     </ul>
   </div>
 </div>
@@ -45,7 +46,7 @@
     <ol class="breadcrumb">
       <li><a href="index.html">管理系统</a></li>
       <li><a href="javascript:;">分类管理</a></li>
-      <li><a href="javascrip:;">用户管理</a></li>
+      <li><a href="javascrip:;">二级菜单</a></li>
 
     </ol>
   </div>
@@ -105,22 +106,48 @@
   </div>
 </div>
 
-<!--模态框的添加菜单功能-->
-<div id="first_modal" class="modal fade"  tabindex="-1" data-target=".bs-example-modal-sm">
+<!--模态框的添加耳二级菜单功能-->
+<div class="modal fade" id="second_modal">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" ><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
         <h4 class="modal-title">添加分类</h4>
       </div>
       <div class="modal-body">
         <form id="form">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="请输入一级分类" name="categoryName">
+            <div class="dropdown">
+              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                <span id="dropdownText">请选择一级分类</span>
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <!-- 刨个坑 -->
+              </ul>
+            </div>
+
+            <input type="hidden" name="categoryId">
+            <!-- 火热的品牌 -->
+            <input type="hidden" name="hot" value="1">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="请输入二级分类" name="brandName">
+          </div>
+          <div class="form-group">
+            <label class="btn btn-default" for="fileupload">上传图片</label>
+            <!-- 注意:
+                    1. 指定name用于让后台获取图片, 所以不能乱写
+                    2. 指定data-url, 指定接口地址
+            -->
+            <input type="file" name="pic1" data-url="/category/addSecondCategoryPic" id="fileupload" style="display: none;">
+          </div>
+          <div class="form-group" id="imgBox">
+            <img src="images/none.png" width="100">
+            <!-- 图片地址 -->
+            <input type="hidden" name="brandLogo">
           </div>
         </form>
-
-
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
@@ -130,12 +157,17 @@
     </div>
   </div>
 </div>
+
 <script src="lib/jquery/jquery.min.js"></script>
 <script src="lib/bootstrap/js/bootstrap.min.js"></script>
 <script src="lib/bootstrap-validator/js/bootstrapValidator.min.js"></script>
 <script src="lib/echarts/echarts.min.js"></script>
 <script src="lib/artTemplate/template-web.js"></script>
 <script src="lib/bootstrap-paginator/bootstrap-paginator.min.js"></script>
+<script src="lib/nprogress/nprogress.js"></script>
+<!--引入fluid包-->
+<script src="lib/jquery-fileupload/jquery.ui.widget.js"></script>
+<script src="lib/jquery-fileupload/jquery.fileupload.js"></script>
 <script src="js/index.js"></script>
 <script src="js/second.js"></script>
 
@@ -152,5 +184,13 @@
 {{/each}}
 </script>
 
+
+<script type="text/html" id="tmp-first">
+
+  {{ each list v i }}
+  <li><a href="#" data-id="{{ v.id }}">{{ v.categoryName }}</a></li>
+  {{ /each }}
+
+</script>
 </body>
 </html>
