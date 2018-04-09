@@ -32,6 +32,7 @@
   </div>
 </div>
 <div class="lr_main">
+  <button id="addbtn" class="btn btn-default mb_30">添加分类</button>
   <div class="menus">
     <a class="pull-left login-menus" href="#"><i class="glyphicon glyphicon-align-justify"></i></a>
     <a class="pull-right login-exit" href="#"><i class="glyphicon glyphicon-log-out"></i></a>
@@ -39,32 +40,117 @@
   <!--路径导航-->
   <div class="container-fluid">
     <ol class="breadcrumb">
-      <li><a href="#">管理系统</a></li>
-      <li><a href="#">首页</a></li>
+      <li><a href="index.html">管理系统</a></li>
+      <li><a href="product.html">商品管理</a></li>
 
     </ol>
+  </div>
+<table class="table table-bordered table-hover">
+  <thead>
+  <tr>
+    <th width="10%">序号</th>
+    <th width="25%">商品名称</th>
+    <th width="25%">商品描述</th>
+    <th width="10%">商品库存</th>
+    <th width="10%">商品尺寸</th>
+    <th width="10%">商品状态</th>
+    <th width="10%">操作</th>
+  </tr>
+  <tbody id="pro-render">
+
+
+
+</tbody>
+  </thead>
+</table>
+  <!--分页功能-->
+  <div class="pull-right">
+    <ul id="pagination">
+
+    </ul>
   </div>
 
 </div>
 
 <!--模态框的功能-->
-<div id="logoutModal" class="modal fade"  tabindex="-1" data-target=".bs-example-modal-sm">
-  <div class="modal-dialog modal-sm">
+<div class="modal fade" id="product_modal">
+  <div class="modal-dialog ">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" ><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">温馨提示</h4>
+        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+        <h4 class="modal-title">添加分类</h4>
       </div>
       <div class="modal-body">
-        <p class="red">
-          <i class="glyphicon glyphicon-info-sign"></i>
-          您确定要退出后台管理系统吗？
-        </p>
+        <form id="form">
+          <div class="form-group">
+            <div class="dropdown">
+              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                <span id="dropdownText">请选择二级分类</span>
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <!-- 刨个坑 -->
+              </ul>
+            </div>
+            <!-- 二级分类id: 归属的品牌 -->
+            <input type="hidden" name="brandId">
+            <!-- 商品上架下架  默认上架 值为 1 -->
+            <input type="hidden" name="statu" value="1">
+          </div>
 
+          <!-- 商品名称 -->
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="请输入商品名称" name="proName">
+          </div>
+
+          <!-- 商品描述 -->
+          <div class="form-group">
+            <textarea class="form-control" rows="3" name="proDesc" placeholder="请输入商品描述"></textarea>
+          </div>
+
+
+          <!-- 商品库存 -->
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="请输入商品库存" name="num">
+          </div>
+
+          <!-- 商品尺码 -->
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="请输入商品尺码" name="size">
+          </div>
+
+          <!-- 商品原价 -->
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="请输入商品原价" name="oldPrice">
+          </div>
+
+          <!-- 商品现价 -->
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="请输入商品现价" name="price">
+          </div>
+
+
+
+          <div class="form-group">
+            <label class="btn btn-default" for="fileupload">上传图片</label>
+            <!-- 注意:
+                    1. 指定name用于让后台获取图片, 所以不能乱写
+                    2. 指定data-url, 指定接口地址
+                    3. multiple 用于多文件上传
+            -->
+            <input type="file" multiple name="pic1" data-url="/product/addProductPic" id="fileupload" style="display: none;">
+          </div>
+          <div class="form-group" id="imgBox">
+
+            <!-- 作用: 标记当前图片有没有上传满三张 -->
+            <input type="hidden" name="picStatus">
+          </div>
+        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="button" class="btn btn-primary" id="logoutBtn">确定</button>
+        <!-- html5 新增 form 属性, 可以让表单外的按钮, 与表单关联起来(就相当于是写在了表单里面)-->
+        <button type="submit" class="btn btn-primary" form="form">添加</button>
       </div>
     </div>
   </div>
@@ -74,8 +160,41 @@
 <script src="lib/bootstrap/js/bootstrap.min.js"></script>
 <script src="lib/bootstrap-validator/js/bootstrapValidator.min.js"></script>
 <script src="lib/echarts/echarts.min.js"></script>
+<script src="lib/artTemplate/template-web.js"></script>
+<script src="lib/bootstrap-paginator/bootstrap-paginator.min.js"></script>
 <script src="lib/nprogress/nprogress.js"></script>
+<!--引入fluid包-->
+<script src="lib/jquery-fileupload/jquery.ui.widget.js"></script>
+<script src="lib/jquery-fileupload/jquery.fileupload.js"></script>
 <script src="js/index.js"></script>
+<script src="js/product.js"></script>
 
+
+<script type="text/html" id="pro-tmp">
+  {{each rows v i }}
+  <tr>
+    <td>{{(page-1)*size+(i+1)}}</td>
+    <td>{{v.proName}}</td>
+    <td>{{v.proDesc}}</td>
+    <td>{{v.num
+      }}</td>
+    <td>{{v.size}}</td>
+    <td>{{v.statu===1?"下架":"上架"}}</td>
+    {{if v.statu===1}}
+    <td><button class="btn btn-danger">下架</button></td>
+    {{else}}
+    <td><button class="btn btn-primary">下架</button></td>
+    {{/if}}
+  </tr>
+
+{{/each}}
+</script>
+
+
+<script type="text/html" id="dropdownTpl">
+  {{ each rows v i }}
+  <li><a data-id="{{ v.id }}" href="#">{{ v.brandName }}</a></li>
+  {{ /each }}
+</script>
 </body>
 </html>

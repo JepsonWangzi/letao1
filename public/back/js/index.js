@@ -27,9 +27,9 @@ if(location.href.indexOf("login.html")===-1){
     url:'/employee/checkRootLogin',
     type:'get',
     success:function (info) {
-      console.log(info);
+      //console.log(info);
       if(info.success){
-        console.log(666);
+        //console.log(666);
       }
       if(info.error===400){
         //拦截登陆

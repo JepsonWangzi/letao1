@@ -33,7 +33,8 @@ $(function () {
             //page当前的页码
             currentPage=page;
             render();
-          }
+          },
+
         })
       }
     })
